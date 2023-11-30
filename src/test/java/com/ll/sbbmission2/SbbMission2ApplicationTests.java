@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -18,13 +19,12 @@ class SbbMission2ApplicationTests {
     @Test
     void testJpa() {
 
-        Optional<Question> oq = this.questionRepository.findById(1);
-
-        assertTrue(oq.isPresent());
-        Question q= oq.get(); //값을 가져온다.
-        q.setSubject("제목을수정한다.");
-        this.questionRepository.save(q); // 수정한 값을 db 에저장 
-
+        assertEquals(2,this.questionRepository.count()); //데이터가 2개인지 확인
+        Optional<Question> oq = this.questionRepository.findById(1);// question 객체의 id값을 db 에서 찾는다
+        assertTrue(oq.isPresent()); //1번 id 값이 존재 여부 확인
+        Question q = oq.get();// 1번 값을 가져온다.
+        this.questionRepository.delete(q); // 가져온 1번값을 삭제한다.
+        assertEquals(1,this.questionRepository.count()); // 삭제 한 후 데이터가 1개 인지 확인
     }
 
 }
