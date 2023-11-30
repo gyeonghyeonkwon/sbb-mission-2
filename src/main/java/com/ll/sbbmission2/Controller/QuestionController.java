@@ -15,6 +15,13 @@ public class QuestionController {
 
     private final QuestionRepository questionRepository;
 
+  @GetMapping("/")
+  public String showRedirect(){
+
+      return "redirect:question/list";
+  }
+
+
    @GetMapping("/question/list")
    public String showList(Model model) {
 
