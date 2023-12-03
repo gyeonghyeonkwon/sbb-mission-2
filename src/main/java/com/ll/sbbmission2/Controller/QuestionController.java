@@ -1,7 +1,7 @@
 package com.ll.sbbmission2.Controller;
 
 import com.ll.sbbmission2.Entity.Question;
-import com.ll.sbbmission2.Repository.QuestionRepository;
+import com.ll.sbbmission2.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class QuestionController {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
   @GetMapping("/")
   public String showRedirect(){
@@ -25,7 +25,7 @@ public class QuestionController {
    @GetMapping("/question/list")
    public String showList(Model model) {
 
-       List<Question> questionList = this.questionRepository.findAll();
+       List<Question> questionList = this.questionService.getList();
 
        model.addAttribute("questionList", questionList);
 
