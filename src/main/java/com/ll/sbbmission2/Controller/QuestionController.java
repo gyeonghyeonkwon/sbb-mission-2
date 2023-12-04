@@ -23,7 +23,8 @@ public class QuestionController {
   @GetMapping("/")
   public String showRedirect(){
 
-      return "redirect:/question/list";
+      String s = "redirect:/question/list/";
+      return s;
   }
 
 
@@ -44,10 +45,9 @@ public class QuestionController {
 
        model.addAttribute("question",question);
 
-      log.info(question.toString());
+      log.info(question.getId().toString());
 
       return"/question_detail";
    }
-
 
 }
